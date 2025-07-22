@@ -32,9 +32,11 @@
         <AppButton text="Порахувати" type="submit"/>
       </form>
     </main>
-    <Transition>
-      <CalcModal v-if="isShowModal" @close="onCloseModal" :value="value"/>
-    </Transition>
+    <Teleport to="body">
+      <Transition>
+        <CalcModal v-if="isShowModal" @close="onCloseModal" :value="value"/>
+      </Transition>
+    </Teleport>
   </div>
 </template>
 
@@ -61,16 +63,15 @@ const onInput = (e: Event) => {
 const onSubmit = () => {
   if (!onValidate(value.value || 0)) {
     isShowModal.value = true;
-
-    window?.confetti({
-      ticks: 50,
-      colors: ['f9f404', '0429f9', 'dbd715', '0452f9'],
-      particleCount: 300,
-      spread: 120,
-      scalar: 3,
-      origin: { y: 0.5, x: 0.5 },
-      shapes: ['heart']
-    });
+     window?.confetti({
+        ticks: 50,
+        colors: ['f9f404', '0429f9', 'dbd715', '0452f9'],
+        particleCount: 300,
+        spread: 120,
+        scalar: 3,
+        origin: { y: 0.5, x: 0.5 },
+        shapes: ['heart']
+      });
   }
 }
 
